@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+
+</div>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('danger') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h2>Gestions <b>des products</b></h2>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{{ path('product.add') }}" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>ajouter product</span></a>
+                        <a href="#" onclick="return confirm('are u sure to delete all  products?')" class="btn btn-danger"><i class="material-icons">&#xE15C;</i> <span>supprimer All</span></a>
+
+                    </div>
+                </div>
+            </div>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="selectAll">
+								<label for="selectAll"></label>
+							</span>
+                    </th>
+                    <th>Nom</th>
+                    <th>Image</th>
+                    <th>description</th>
+                    <th>price </th>
+                    <th>quantity </th>
+                    <th>created at </th>
+                    <th>Category</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for product in products %}
+                    <tr>
+                        <td>
+							<span class="custom-checkbox">
+								<input type="checkbox" id="checkbox1" name="checkbox" value="">
+								<label for="checkbox1"></label>
+							</span>
+                        </td>
+                        <td>{{ product.name }}</td>
+                        <td>
+                            <img src="{{ asset('imagesUpload/')}}{{ product.image }} " class="img-thumbnail" style="max-width: 40%;max-height: 60%;">
+                        </td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.quantity }}</td>
+                        <td>{{ product.getCreatedAt()| date }}</td>
+                        <td>{{ product.getCategory().name}}</td>
+                        <td>
+                            <a href="/showproduct/{{product.id}}" class="show-for-large">Show</a>
+                            <a href="/editproduct/{{product.id}}" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                            <form action="{{ url('deleteproduct', { id: product.id }) }}" method="post">
+                               <input type="hidden" name="token" value="{{ csrf_token('delete-product') }}"/>
+                                <button type="submit" onclick="return confirm('are u sure to delete the product?')" >Delete</button>
+                            </form>
+                             </td>
+                    </tr>
+
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
