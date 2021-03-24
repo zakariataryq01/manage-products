@@ -9,56 +9,53 @@
 </style>
 
 <div class="example-wrapper">
-    <div>
-        {{ form_errors(form) }}
-    </div>
         {% for error in errors %}
             <div class="alert alert-danger">
                 {{ error.message }}
             </div>
         {% endfor %}
-
     <div>
         {{ form_start(form) }}
 
         <div>
-            {{ form_label(form.name, "Nom du produit") }}
+            <label>Nom du produit</label>
             <div>
                 {{ form_widget(form.name) }}
             </div>
         </div>
         <div>
-            {{ form_label(form.description, "description du produit") }}
+            <label>description du produit</label>
+
             <div>
                 {{ form_widget(form.description) }}
             </div>
         </div>
         <div>
-            {{ form_label(form.category, "la categorie") }}
+            <label>la categorie</label>
             <div>
                 {{ form_widget(form.category) }}
             </div>
         </div>
         <div>
-            {{ form_label(form.quantity, "Quantité") }}
+            <label>Quantité</label>
             <div>
                 {{ form_widget(form.quantity) }}
             </div>
         </div>
         <div>
-            {{ form_label(form.price, "Le prix") }}
+            <label>Le prix</label>
             <div>
                 {{ form_widget(form.price) }}
             </div>
         </div>
         <div>
-            {{ form_label(form.TTC, "Inclue le TVA ") }}
+
             <div>
                 {{ form_widget(form.TTC) }}
             </div>
         </div>
         <div>
-            {{ form_label(form.image, "inserer une image ") }}
+            <label>inserer une image </label>
             <div>
                 {{ form_widget(form.image) }}
             </div>

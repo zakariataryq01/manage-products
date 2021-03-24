@@ -6,7 +6,7 @@ use App\Entity\Product;
 use App\Form\Type\ProductType;
 use App\Repository\ProductRepository;
 use App\Services\CalculPrixTTC;
-use App\Services\ProductFormHandler;
+use App\Form\Handlers\ProductFormHandler;
 use Doctrine\DBAL\Types\FloatType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
